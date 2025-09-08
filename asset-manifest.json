@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/tekizian.github.io/static/css/main.214df5d2.css",
+    "main.js": "/tekizian.github.io/static/js/main.e6704046.js",
+    "static/js/453.426bc3c2.chunk.js": "/tekizian.github.io/static/js/453.426bc3c2.chunk.js",
+    "index.html": "/tekizian.github.io/index.html",
+    "main.214df5d2.css.map": "/tekizian.github.io/static/css/main.214df5d2.css.map",
+    "main.e6704046.js.map": "/tekizian.github.io/static/js/main.e6704046.js.map",
+    "453.426bc3c2.chunk.js.map": "/tekizian.github.io/static/js/453.426bc3c2.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.214df5d2.css",
+    "static/js/main.e6704046.js"
+  ]
+}
