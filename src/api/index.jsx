@@ -1,20 +1,37 @@
+import { useState } from 'react';
+
 const URL_BASE = process.env.REACT_APP_URL_BASE
 
-const fetchData = async (url) => {
-    const abortCtrl = new AbortController();
-    try {
-        console.info({ URL_BASE, url });
-        const res = await fetch(`${URL_BASE}${url}`, { signal: abortCtrl.signal })
+const useFetch = () => {
+    const [data, setData] = useState(null);
+    const [isPending, setIsPending] = useState(false);
+    const [error, setError] = useState(null);
 
-        if (!res.ok) {
-            throw new Error(res.body);
-        }
-
-        const json = await res.json();
-        console.log(json);
-    } catch (err) {
-        throw err;
+    const resetState = () => {
+        setIsPending(true);
+        setError(null);
+        setData(null);
     }
+
+    const fetchData = async (url) => {
+        resetState();
+
+        try {
+            const res = await fetch(`${URL_BASE}${url}`)
+
+            if (!res.ok) {
+                throw new Error(res.body);
+            }
+
+            const json = await res.json();
+            setData(json);
+        } catch (err) {
+            setError(err);
+        } finally {
+            setIsPending(false);
+        }
+    };
+    return { data, isPending, error, fetchData }
 }
 
-export default fetchData
+export default useFetch
