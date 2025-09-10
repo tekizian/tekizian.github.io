@@ -5,7 +5,7 @@ function NewItemInput({ addItem }) {
   const [newItem, setNewItem] = useState("");
   const handleAddItem = () => {
     if (!newItem.length) return;
-    addItem(newItem);
+    addItem([newItem, false]);
     setNewItemValue("");
   };
   const setNewItemValue = (v) => setNewItem(v);
