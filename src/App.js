@@ -8,15 +8,15 @@ const App = () => {
   const { fetchApi, isPending, error } = useApi();
   const [data, setData] = useState(null);
   const defaultDetails = [
-    "Integrate with Auth0",
-    "Create a secure endpoint",
-    "Connect Server to database",
+    ["Integrate with Auth0", true],
+    ["Create a secure endpoint", true],
+    ["Connect Server to database", false],
   ];
   return (
     <div className="App">
       <Masthead />
       <header className="App-header">
-        <Panel title="TODO List" details={[]}></Panel>
+        <Panel title="TODO List" details={defaultDetails}></Panel>
         <button onClick={() => fetchApi("/api/hw").then(setData)}>
           TESTING
         </button>
