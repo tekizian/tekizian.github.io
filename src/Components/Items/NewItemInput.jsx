@@ -26,7 +26,7 @@ function NewItemInput({ addItem }) {
         type="text"
         onChange={onNewItemInputChange}
         onKeyDown={onKeyDownFn}
-        value={newItem}
+        value={newItem || ''}
       />
       <Button
         {...{

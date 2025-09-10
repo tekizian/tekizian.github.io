@@ -22,14 +22,14 @@ function Panel(props) {
           {String.fromCharCode(visible ? 9650 : 9660)}
         </span>
       </h3>
-      {visible && (
+      {visible ? (
         <ul className="todo-list">
           {items.map((value, index) => (
             <Item key={index} {...{ value, deleteItem, index }} />
           ))}
           <NewItemInput key={items.length} {...{ addItem }} />
         </ul>
-      )}
+      ) : undefined}
     </div>
   );
 }

@@ -1,37 +1,44 @@
-import { useState } from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
+import { useCallback, useState } from 'react';
 
 const URL_BASE = process.env.REACT_APP_URL_BASE
 
-const useFetch = () => {
-    const [data, setData] = useState(null);
-    const [isPending, setIsPending] = useState(false);
+const useApi = () => {
+    const { isAuthenticated, getAccessTokenSilently } = useAuth0();
+    const [isPending, setPending] = useState(null);
     const [error, setError] = useState(null);
 
-    const resetState = () => {
-        setIsPending(true);
+    const fetchApi = useCallback(async (url, options = {}) => {
+        setPending(true);
         setError(null);
-        setData(null);
-    }
-
-    const fetchData = async (url) => {
-        resetState();
+        let data = null;
 
         try {
-            const res = await fetch(`${URL_BASE}${url}`)
+            if (!isAuthenticated) throw new Error('User is not authenticated');
+
+            const token = await getAccessTokenSilently();
+            const headers = {
+                ...options.headers,
+                Authorization: `Bearer ${token}`,
+            };
+            const res = await fetch(URL_BASE + url, { ...options, headers });
 
             if (!res.ok) {
-                throw new Error(res.body);
+                const errMsg = await res.text();
+                throw new Error(`API call failed: ${res.status} ${res.statusText} - ${errMsg}`)
             }
-
-            const json = await res.json();
-            setData(json);
+            data = await res.json();
         } catch (err) {
+            // TODO: handle expired tokens
             setError(err);
         } finally {
-            setIsPending(false);
+            setPending(false);
         }
-    };
-    return { data, isPending, error, fetchData }
+
+        return data;
+    }, [isAuthenticated, getAccessTokenSilently]);
+
+    return { fetchApi, isLoading: isPending, error }
 }
 
-export default useFetch
+export default useApi;

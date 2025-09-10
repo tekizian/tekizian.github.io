@@ -13,7 +13,7 @@ function Item({ value, index, deleteItem }) {
         label={checkboxName}
         title={checkboxName}
         type="checkbox"
-        placeholder={false}
+        placeholder="false"
       />
       <span>{value}</span>
       <Button {...{ text: "Delete", clickFn: deleteItemAtIndex }} />
