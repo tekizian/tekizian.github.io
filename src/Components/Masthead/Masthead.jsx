@@ -2,7 +2,7 @@ import { useAuth0 } from "@auth0/auth0-react"
 import LogoutButton from "../Button/LogoutButton";
 import LoginButton from "../Button/LoginButton";
 import { useEffect, useState } from "react";
-import config from "../../utils/config";
+import config from "../../utils/config.js";
 
 const Masthead = () => {
     const { user, isAuthenticated, isLoading, getAccessTokenSilently } = useAuth0();
