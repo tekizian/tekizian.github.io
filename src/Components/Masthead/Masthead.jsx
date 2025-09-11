@@ -29,7 +29,8 @@ const Masthead = () => {
                 const { user_metadata } = await metadataResponse.json();
                 setUserMetadata(user_metadata);
             } catch (err) {
-                console.log(err.message);
+                if (err.error === 'missing_refresh_token') return;
+                console.error(err.message);
             }
         };
         getUserMetadata();
