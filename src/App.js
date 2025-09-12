@@ -19,7 +19,7 @@ const App = () => {
       <header className="App-header">
         <h2>Welcome</h2>
       </header>
-      <div>
+      <div className="app-body">
         <Panel title="TODO List" details={defaultDetails}></Panel>
         <Button onClick={() => fetchApi("/api/hw").then(setData)}>
           TESTING
