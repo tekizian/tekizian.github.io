@@ -20,7 +20,7 @@ function Item({ value, index, deleteItem }) {
         onChange={() => setIsFulfilled(!isFulfilled)}
       />
       <span className="todo-text">{text}</span>
-      <Button {...{ clickFn: deleteItemAtIndex }}>Delete</Button>
+      <Button onClick={deleteItemAtIndex}>Delete</Button>
     </div>
   );
 }

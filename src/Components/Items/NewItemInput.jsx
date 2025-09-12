@@ -30,9 +30,7 @@ function NewItemInput({ addItem }) {
         className="todo-text"
       />
       <Button className="add"
-        {...{
-          clickFn: handleAddItem,
-        }}
+        clickFn={handleAddItem}
       >+</Button>
     </div>
   );
