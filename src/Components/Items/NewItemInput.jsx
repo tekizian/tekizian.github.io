@@ -18,7 +18,7 @@ function NewItemInput({ addItem }) {
     }
   };
   return (
-    <li className="new-input">
+    <div className="new-input list-item">
       <input
         title=""
         name="new-item"
@@ -27,14 +27,14 @@ function NewItemInput({ addItem }) {
         onChange={onNewItemInputChange}
         onKeyDown={onKeyDownFn}
         value={newItem || ''}
+        className="todo-text"
       />
-      <Button
+      <Button className="add"
         {...{
-          text: "+",
           clickFn: handleAddItem,
         }}
-      />
-    </li>
+      >+</Button>
+    </div>
   );
 }
 

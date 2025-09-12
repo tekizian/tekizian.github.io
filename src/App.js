@@ -3,6 +3,7 @@ import useApi from "./api";
 import "./App.css";
 import Masthead from "./Components/Masthead/Masthead";
 import Panel from "./Components/Panel/Panel";
+import Button from "./Components/Button/Button";
 
 const App = () => {
   const { fetchApi, isPending, error } = useApi();
@@ -16,10 +17,13 @@ const App = () => {
     <div className="App">
       <Masthead />
       <header className="App-header">
+        <h2>Welcome</h2>
+      </header>
+      <div>
         <Panel title="TODO List" details={defaultDetails}></Panel>
-        <button onClick={() => fetchApi("/api/hw").then(setData)}>
+        <Button onClick={() => fetchApi("/api/hw").then(setData)}>
           TESTING
-        </button>
+        </Button>
         <span>
           {isPending
             ? "PENDING"
@@ -29,7 +33,7 @@ const App = () => {
             ? error.message
             : "No Data Yet"}
         </span>
-      </header>
+      </div>
     </div>
   );
 };

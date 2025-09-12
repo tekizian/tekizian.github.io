@@ -9,7 +9,7 @@ function Item({ value, index, deleteItem }) {
   const [text] = value;
   const checkboxName = `checkbox-${index}`;
   return (
-    <li className="list-item">
+    <div className="list-item">
       <input
         id={checkboxName}
         name={checkboxName}
@@ -19,9 +19,9 @@ function Item({ value, index, deleteItem }) {
         checked={isFulfilled}
         onChange={() => setIsFulfilled(!isFulfilled)}
       />
-      <span>{text}</span>
-      <Button {...{ text: "Delete", clickFn: deleteItemAtIndex }} />
-    </li>
+      <span className="todo-text">{text}</span>
+      <Button {...{ clickFn: deleteItemAtIndex }}>Delete</Button>
+    </div>
   );
 }
 

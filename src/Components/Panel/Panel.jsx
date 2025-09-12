@@ -16,19 +16,22 @@ function Panel(props) {
   };
   return (
     <div className="panel">
-      <h3>
-        {props.title}
-        <span onClick={toggleVisibility}>
+      <div className="title" onClick={toggleVisibility}>
+
+        <h4 className="text">
+          {props.title}
+        </h4>
+        <span className="collapse-icon">
           {String.fromCharCode(visible ? 9650 : 9660)}
         </span>
-      </h3>
+      </div>
       {visible ? (
-        <ul className="todo-list">
+        <div className="todo-list list">
           {items.map((value, index) => (
             <Item key={index} {...{ value, deleteItem, index }} />
           ))}
           <NewItemInput key={items.length} {...{ addItem }} />
-        </ul>
+        </div>
       ) : undefined}
     </div>
   );

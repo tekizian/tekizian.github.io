@@ -1,0 +1,8 @@
+.masthead{
+    display: flex;
+    justify-content:space-between;
+}
+.auth-btn {
+    margin: .5rem 1rem;
+    margin-left: auto;
+}

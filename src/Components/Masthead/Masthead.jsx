@@ -3,6 +3,7 @@ import LogoutButton from "../Button/LogoutButton";
 import LoginButton from "../Button/LoginButton";
 import { useEffect, useState } from "react";
 import config from "../../utils/config.js";
+import './Masthead.css';
 
 const Masthead = () => {
     const { user, isAuthenticated, isLoading, getAccessTokenSilently } = useAuth0();
