@@ -12,13 +12,11 @@ function Item({ id, text, isChecked, index, setItems }) {
     setItems((prev) => {
       const next = new Map(prev);
       const base = prev.get(id);
-      console.info({ id, base, next });
       next.set(id, { ...base, isChecked: !base.isChecked });
       return next;
     })
   }
   const checkboxName = `checkbox-${index}`;
-  console.info(`rendering ${index}`)
   return (
     <div className="list-item">
       <input
