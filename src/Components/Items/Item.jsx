@@ -1,13 +1,24 @@
-import { useState } from "react";
 import Button from "../Button/Button";
 
-function Item({ value, index, deleteItem }) {
-  const [isFulfilled, setIsFulfilled] = useState(value[1]);
-  const deleteItemAtIndex = () => {
-    deleteItem(index);
-  };
-  const [text] = value;
+function Item({ id, text, isChecked, index, setItems }) {
+  const deleteItem = () => {
+    setItems((prev) => {
+      const next = new Map(prev);
+      next.delete(id);
+      return next;
+    })
+  }
+  const toggleItem = () => {
+    setItems((prev) => {
+      const next = new Map(prev);
+      const base = prev.get(id);
+      console.info({ id, base, next });
+      next.set(id, { ...base, isChecked: !base.isChecked });
+      return next;
+    })
+  }
   const checkboxName = `checkbox-${index}`;
+  console.info(`rendering ${index}`)
   return (
     <div className="list-item">
       <input
@@ -16,11 +27,11 @@ function Item({ value, index, deleteItem }) {
         label={checkboxName}
         title={checkboxName}
         type="checkbox"
-        checked={isFulfilled}
-        onChange={() => setIsFulfilled(!isFulfilled)}
+        checked={isChecked}
+        onChange={toggleItem}
       />
       <span className="todo-text">{text}</span>
-      <Button onClick={deleteItemAtIndex}>Delete</Button>
+      <Button onClick={deleteItem}>Delete</Button>
     </div>
   );
 }

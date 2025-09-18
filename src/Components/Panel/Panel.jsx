@@ -1,18 +1,31 @@
 import { useState } from "react";
 import Item from "../Items/Item";
 import NewItemInput from "../Items/NewItemInput";
-
 import "./Panel.css";
 
+const uuid = () => Math.floor(Math.random() * 10000000000);
+
 function Panel(props) {
-  const [items, setItems] = useState(props.details);
+  const defaultDetails = [
+    [uuid(), "Integrate with Auth0", true],
+    [uuid(), "Create a secure endpoint", true],
+    [uuid(), "Connect Server to database", false],
+  ];
+  const detailsMap = new Map(defaultDetails.map(([id, text, isChecked], i) => [id, { text, isChecked }]));
+  const [items, setItems] = useState(detailsMap);
   const [visible, setVisible] = useState(true);
   const toggleVisibility = () => setVisible(!visible);
-  const deleteItem = (index) => {
-    setItems(items.toSpliced(index, 1));
-  };
+
   const addItem = (newItem) => {
-    setItems([...items, newItem]);
+    setItems((prev) => {
+      const next = new Map(prev);
+      let id = uuid();
+      while (next.has(id)) { // Avoid collisions
+        id = uuid();
+      }
+      next.set(id, newItem);
+      return next;
+    });
   };
   return (
     <div className="panel">
@@ -27,14 +40,20 @@ function Panel(props) {
       </div>
       {visible ? (
         <div className="todo-list list">
-          {items.map((value, index) => (
-            <Item key={index} {...{ value, deleteItem, index }} />
-          ))}
+          <Items {...{ setItems, items }} />
           <NewItemInput key={items.length} {...{ addItem }} />
         </div>
       ) : undefined}
     </div>
   );
+}
+
+function Items({ items, setItems }) {
+  return <>{
+    items.entries().map(([id, { text, isChecked }]) =>
+      <Item key={id} {...{ text, isChecked, setItems, id }} />
+    )
+  }</>
 }
 
 export default Panel;

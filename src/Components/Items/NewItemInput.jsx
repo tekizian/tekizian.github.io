@@ -5,7 +5,7 @@ function NewItemInput({ addItem }) {
   const [newItem, setNewItem] = useState("");
   const handleAddItem = () => {
     if (!newItem.length) return;
-    addItem([newItem, false]);
+    addItem({ text: newItem, isChecked: false });
     setNewItemValue("");
   };
   const setNewItemValue = (v) => setNewItem(v);

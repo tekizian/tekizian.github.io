@@ -8,11 +8,6 @@ import Button from "./Components/Button/Button";
 const App = () => {
   const { fetchApi, isPending, error } = useApi();
   const [data, setData] = useState(null);
-  const defaultDetails = [
-    ["Integrate with Auth0", true],
-    ["Create a secure endpoint", true],
-    ["Connect Server to database", false],
-  ];
   return (
     <div className="App">
       <Masthead />
@@ -20,7 +15,7 @@ const App = () => {
         <h2>Welcome</h2>
       </header>
       <div className="app-body">
-        <Panel title="TODO List" details={defaultDetails}></Panel>
+        <Panel title="TODO List" />
         <Button onClick={() => fetchApi("/api/hw").then(setData)}>
           TESTING
         </Button>
