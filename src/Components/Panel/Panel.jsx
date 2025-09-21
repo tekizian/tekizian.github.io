@@ -28,18 +28,18 @@ function Panel(props) {
     });
   };
   return (
-    <div className="panel">
+    <div className={"panel" + (visible ? '' : ' collapsed')}>
       <div className="title" onClick={toggleVisibility}>
 
         <h4 className="text">
           {props.title}
         </h4>
         <span className="collapse-icon">
-          {String.fromCharCode(visible ? 9650 : 9660)}
+          ▼
         </span>
       </div>
-      {visible ? (
-        <div className="todo-list list">
+      {true ? (
+        <div className={"todo-list list" + (visible ? '' : ' collapsed')}>
           <Items {...{ setItems, items }} />
           <NewItemInput key={items.length} {...{ addItem }} />
         </div>
@@ -50,7 +50,7 @@ function Panel(props) {
 
 function Items({ items, setItems }) {
   return <>{
-    items.entries().map(([id, { text, isChecked }]) =>
+    [...items.entries()].map(([id, { text, isChecked }]) =>
       <Item key={id} {...{ text, isChecked, setItems, id }} />
     )
   }</>

@@ -1,6 +1,6 @@
 import Button from "../Button/Button";
 
-function Item({ id, text, isChecked, index, setItems }) {
+function Item({ id, text, isChecked, setItems }) {
   const deleteItem = () => {
     setItems((prev) => {
       const next = new Map(prev);
@@ -16,7 +16,7 @@ function Item({ id, text, isChecked, index, setItems }) {
       return next;
     })
   }
-  const checkboxName = `checkbox-${index}`;
+  const checkboxName = `checkbox-${id}`;
   return (
     <div className="list-item">
       <input

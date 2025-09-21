@@ -16,6 +16,8 @@
     justify-content: space-between;
     align-items: center;
     padding: 0.5rem 1rem;
+    color: #4d3e2a;
+    font-weight: 900;
 
     .text {
       margin: 0;
@@ -24,15 +26,31 @@
     .collapse-icon {
       margin: 0.25rem 0.75rem;
       align-self: end;
+      transform: rotate(180deg);
+      transition: transform 0.5s ease-in-out;
     }
   }
 }
 
+.panel.collapsed {
+  max-height: fit-content;
+  .collapse-icon {
+    transform: rotate(360deg);
+  }
+}
+
 .list {
-  padding: 0.25rem;
+  padding: 0.5rem 0.25rem;
   margin: 0;
   display: flex;
   flex-direction: column;
+  max-height: 50svh;
+  transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
+}
+.list.collapsed {
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 .list-item {
@@ -49,10 +67,15 @@
 
 .todo-list > .list-item > input.todo-text {
   margin-left: 2rem;
+  margin-top: 0.25rem;
 }
 
 .todo-list > .list-item > button {
   margin: 0.25rem 0.75rem;
+}
+
+span.todo-text {
+  transform: translateY(-2px);
 }
 
 .todo-list > .list-item > * {
